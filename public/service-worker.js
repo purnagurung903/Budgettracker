@@ -12,6 +12,9 @@ const FILES_TO_CACHE = [
 // install
 self.addEventListener("install", (evt) => {
   evt.waitUntil(
+    caches.open(DATA_CACHE_NAME).then((cache) => cache.add("/api/transaction"))
+  );
+  evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log("Your files were pre-cached successfully!");
       return cache.addAll(FILES_TO_CACHE);
@@ -63,17 +66,26 @@ self.addEventListener("fetch", (evt) => {
   }
 
   evt.respondWith(
-    fetch(evt.request).catch( () => {
-      return caches.match(evt.request).then(function (response) {
-        if (response) {
-          return response;
-        } else if (evt.request.headers.get("accept").includes("text/html")) {
-          // return the cached home page for all requests for html pages
-          return caches.match("/");
-        }
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.match(evt.request).then(response => {
+        return response || fetch(evt.request);
       });
     })
   );
 });
+
+//   evt.respondWith(
+//     fetch(evt.request).catch( () => {
+//       return caches.match(evt.request).then(function (response) {
+//         if (response) {
+//           return response;
+//         } else if (evt.request.headers.get("accept").includes("text/html")) {
+//           // return the cached home page for all requests for html pages
+//           return caches.match("/");
+//         }
+//       });
+//     })
+//   );
+// });
 
 
