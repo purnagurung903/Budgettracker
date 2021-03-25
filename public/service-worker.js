@@ -10,7 +10,7 @@ const FILES_TO_CACHE = [
 ]
 
 // install
-self.addEventListener("install", function(evt) {
+self.addEventListener("install", (evt) => {
   evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log("Your files were pre-cached successfully!");
@@ -21,7 +21,7 @@ self.addEventListener("install", function(evt) {
   self.skipWaiting();
 });
 // activate 
-self.addEventListener("activate", function(evt) {
+self.addEventListener("activate", (evt) => {
   evt.waitUntil(
     caches.keys().then(keyList => {
       return Promise.all(
@@ -39,7 +39,7 @@ self.addEventListener("activate", function(evt) {
 });
 
 // fetch
-self.addEventListener("fetch", function (evt) {
+self.addEventListener("fetch", (evt) => {
   if (evt.request.url.includes("/api/")) {
     evt.respondWith(
       caches.open(DATA_CACHE_NAME).then(cache => {
@@ -63,7 +63,7 @@ self.addEventListener("fetch", function (evt) {
   }
 
   evt.respondWith(
-    fetch(evt.request).catch(function () {
+    fetch(evt.request).catch( () => {
       return caches.match(evt.request).then(function (response) {
         if (response) {
           return response;
