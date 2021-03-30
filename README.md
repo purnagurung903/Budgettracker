@@ -7,7 +7,7 @@ Technology use: Node.js, JavaScript, Heroku, MongoDB, express, PWA, IndexedDB
 
 GitHub Repository: https://github.com/purnagurung903/Budgettracker.git
 
-Deployed app:
+Deployed app:  https://murmuring-fortress-47525.herokuapp.com/
 
 ## Table of Contents
    
