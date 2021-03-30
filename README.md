@@ -1,5 +1,7 @@
 # Budgettracker
 
+<img width="1440" alt="Screen Shot 2021-03-30 at 6 35 28 PM" src="https://user-images.githubusercontent.com/69695368/113065393-cd3e7600-9186-11eb-9853-ec6e50d6d877.png">
+
 ## Description
 This budgettracker app allows the user to keep track of their account balance even though  connection might not be available. It is a PWA.
 
